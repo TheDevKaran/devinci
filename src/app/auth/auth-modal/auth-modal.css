@@ -1,0 +1,93 @@
+/* =========================
+   AUTH BACKDROP
+========================= */
+.auth-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+/* =========================
+   AUTH MODAL
+========================= */
+.auth-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  width: 380px;
+
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+
+  z-index: 1001;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.35);
+
+  animation: authIn 0.35s ease forwards;
+}
+
+/* Animation */
+@keyframes authIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* =========================
+   AUTH CONTENT
+========================= */
+.auth-modal h2 {
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.auth-modal input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-btn:hover {
+  opacity: 0.9;
+}
+
+.auth-switch {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+  color: #444;
+}
+
+.auth-switch a {
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 4px;
+  color: #111;
+}

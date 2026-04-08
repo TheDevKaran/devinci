@@ -1,0 +1,242 @@
+  <div class="studio-bg">
+
+    <!-- =========================
+        TOP NAVBAR
+    ========================== -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="brand">devinci</span>
+      </div>
+
+  <div class="nav-right">
+    <button
+    *ngIf="authService.getUserRole() === 'admin'"
+    class="btn ghost"
+    (click)="goToAdmin()"
+  >
+    Admin
+  </button>
+
+    <ng-container *ngIf="!authService.isLoggedIn(); else loggedIn">
+      <button class="btn ghost" (click)="openAuth('login')">
+        Log in
+      </button>
+
+      <button class="btn primary" (click)="openAuth('register')">
+        Sign up
+      </button>
+    </ng-container>
+
+    <ng-template #loggedIn>
+      <div class="user-menu">
+        <div class="avatar">user</div>
+  <div class="credit-badge">
+    🎨
+    <span>{{ creditService.getCredits() }}</span>
+  </div>
+
+
+        <button class="btn ghost logout" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+
+    </header>
+
+    <!-- =========================
+        MAIN STUDIO
+    ========================== -->
+    <div class="studio-shell">
+
+      <!-- LEFT PANEL -->
+      <div class="control-panel">
+        <h1 class="logo-title">Image Transformer</h1>
+        <p class="subtitle">Turn photos into expressive art</p>
+
+        <label class="upload-zone">
+          <input type="file" (change)="onImageUpload($event)" accept="image/*" />
+          <div class="upload-inner">
+            <div class="upload-icon">⬆</div>
+            <div class="upload-text">
+              <strong>Upload image</strong>
+              <span>PNG / JPG up to 5MB</span>
+            </div>
+          </div>
+        </label>
+
+        <div class="style-section">
+          <h3 class="section-title">Choose style</h3>
+          <div class="style-grid">
+            <div
+              class="style-tile"
+              *ngFor="let style of styles"
+              [class.active]="style.id === selectedStyle.id"
+              (click)="selectStyle(style)"
+            >
+            <img
+              class = "style-preview"
+              [src] = "style.src",
+              loading="lazy"
+            />
+              <!-- <div
+                class="style-preview"
+
+                [ngStyle]="{ 'background-image': 'url(' + style.src + ')' }"
+                role="img"
+                [attr.aria-label]="style.label"
+
+                >
+              </div> -->
+              <span>{{ style.label }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- ADVANCED PROMPT (OPTIONAL) -->
+<div class="prompt-section">
+  <div class="prompt-header" (click)="showPrompt = !showPrompt">
+    <span>Advanced Prompt</span>
+    <span class="prompt-toggle">
+      {{ showPrompt ? 'Hide' : 'Customize' }}
+    </span>
+  </div>
+
+  <textarea
+    *ngIf="showPrompt"
+    [(ngModel)]="prompt"
+    rows="4"
+    placeholder="Describe how you want the artwork to look (style, mood, colors, details)…"
+    class="prompt-input"
+  ></textarea>
+
+  <p *ngIf="showPrompt" class="prompt-hint">
+    Tip: You can describe mood, colors, brush style, or artistic effects.
+  </p>
+</div>
+
+
+        <button
+          class="cta-btn"
+          (click)="generate()"
+          [disabled]="loading"
+        >
+          {{ loading ? 'Generating…' : 'Generate Art' }}
+        </button>
+
+        <div class="status-text">{{ statusMessage || 'Ready' }}</div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="preview-stage" *ngIf="uploadedPreview">
+        <div class="compare-container">
+
+          <!-- BASE IMAGE -->
+          <img
+            class="compare-image base"
+            [src]="uploadedPreview"
+          />
+
+          <!-- DOODLE OVERLAY -->
+          <div
+            class="compare-overlay"
+            [style.width.%]="sliderValue"
+            *ngIf="outputImage"
+          >
+            <img
+              class="compare-image"
+              [src]="outputImage"
+            />
+          </div>
+
+          <!-- DIVIDER -->
+          <div
+            class="compare-divider"
+            [style.left.%]="sliderValue"
+            *ngIf="outputImage"
+          ></div>
+
+          <!-- SLIDER -->
+          <input
+            *ngIf="outputImage"
+            type="range"
+            min="0"
+            max="100"
+            [(ngModel)]="sliderValue"
+            class="compare-slider"
+          />
+        </div>
+
+        <div class="compare-labels">
+          <span>Original</span>
+          <span>Generated</span>
+        </div>
+      <button
+  class="download-btn"
+  *ngIf="outputImage && !loading"
+  (click)="downloadImage()"
+>
+  ⬇ Download Artwork
+</button>
+      </div>
+
+
+
+
+    </div>
+
+    <!-- =========================
+        AUTH OVERLAY
+        (uses your existing logic)
+    ========================== -->
+
+
+  <app-auth-modal
+    *ngIf="showAuth"
+    [show]="showAuth"
+    [mode]="authMode"
+    (close)="closeAuth()"
+    (submit)="handleAuthSubmit($event)"
+  ></app-auth-modal>
+
+  <div class="toast-container">
+    <div
+      class="toast"
+      *ngFor="let t of toastService.getToasts()"
+      [class.success]="t.type === 'success'"
+      [class.error]="t.type === 'error'"
+      [class.info]="t.type === 'info'"
+    >
+      <span class="toast-text">{{ t.message }}</span>
+
+      <button
+        class="toast-close"
+        (click)="toastService.remove(t.id)"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <div class="auth-backdrop" *ngIf="showUpgradeConfirm"></div>
+
+<div class="auth-modal" *ngIf="showUpgradeConfirm">
+  <h2>Upgrade to Premium</h2>
+
+  <p>
+    You’ve used all free credits.
+    Upgrade to Premium to get 5 more generations.
+  </p>
+
+  <div style="display:flex; gap:12px; margin-top:20px;">
+    <button class="auth-btn" (click)="confirmUpgrade()">
+      Upgrade
+    </button>
+
+    <button class="auth-btn ghost" (click)="cancelUpgrade()">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="auth-backdrop" *ngIf="show" (click)="close.emit()"></div>
+
+<div class="auth-modal" *ngIf="show" (click)="$event.stopPropagation()">
+  <h2>{{ mode === 'login' ? 'Welcome back' : 'Create your account' }}</h2>
+
+  <p class="auth-sub">
+    {{ mode === 'login'
+      ? 'Log in to continue to devinci'
+      : 'Sign up to start creating with devinci' }}
+  </p>
+
+  <!-- ✅ SINGLE SUBMIT ONLY -->
+  <form (ngSubmit)="submitAuth()">
+
+    <input
+      type="email"
+      placeholder="Email address"
+      [(ngModel)]="auth.email"
+      name="email"
+      required
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="auth.password"
+      name="password"
+      required
+    />
+
+    <!-- 🔥 THIS LINE FIXES EVERYTHING -->
+    <button type="submit" class="auth-btn">
+      {{ mode === 'login' ? 'Log in' : 'Sign up' }}
+    </button>
+
+  </form>
+
+  <div class="auth-switch">
+    <span *ngIf="mode === 'login'">
+      New here?
+      <a (click)="switch('register')">Create an account</a>
+    </span>
+
+    <span *ngIf="mode === 'register'">
+      Already have an account?
+      <a (click)="switch('login')">Log in</a>
+    </span>
+  </div>
+</div>

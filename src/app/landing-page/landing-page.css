@@ -1,0 +1,367 @@
+section {
+  padding: 90px 40px;
+}
+
+/* HERO */
+.hero {
+  background: #3f5efb;
+  color: white;
+}
+
+
+.hero-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  line-height: 1.2;
+}
+
+.hero-desc {
+  margin: 20px 0;
+  opacity: 0.9;
+}
+
+.hero-points li {
+  margin: 8px 0;
+}
+
+.btn-hero {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 16px 32px;
+  background: white;
+  color: #3f5efb;
+  border-radius: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* Container on the right side of hero (optional constraint) */
+.hero-visual {
+  /* ensures the grid doesn't grow too large in wide layouts */
+  max-width: 360px;          /* tweak: 280–420px based on your design */
+  margin-left: auto;
+}
+
+/* 2×2 grid */
+.mock-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;                 /* spacing between tiles */
+}
+
+/* Each tile: small square card */
+.mock {
+  position: relative;
+  aspect-ratio: 1 / 1;       /* perfect square */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;          /* white card look */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Image fills the tile and crops nicely */
+.mock img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* fills and crops edges */
+  display: block;
+}
+
+.navbar {
+  position: fixed;          /* sticks naturally */
+  top: 0;
+  z-index: 50;
+  width: 100%;
+
+
+  height: 64px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+
+  /* SAME COLOR LANGUAGE AS HERO */
+    background: #3f5efb;
+
+
+  backdrop-filter: blur(8px);
+}
+
+/* Brand */
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+/* (Optional) Make them even smaller on very small screens */
+@media (max-width: 480px) {
+  .hero-visual {
+    max-width: 300px;
+  }
+  .mock-grid {
+    gap: 10px;
+  }
+}
+
+/* (Optional) Make them a touch smaller overall */
+.small-hero .hero-visual {
+  max-width: 300px;
+}
+
+/* HOW */
+.how-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.mock-large {
+  height: 260px;
+  background: #eaeafe;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Card container */
+.card {
+  background-color: #d6d4f7; /* light purple */
+  border-radius: 16px;
+  padding: 24px;
+  width: 400px; /* adjust as needed */
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+/* Main text */
+.card-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+}
+/* FAQ SECTION */
+/* FAQ SECTION */
+/* FAQ SECTION */
+.faq {
+  padding: 80px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.faq h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #0f172a; /* deep blue-black */
+}
+
+/* LIST */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* CARD */
+.faq-item {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Remove default arrow */
+.faq-item summary {
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* QUESTION */
+.faq-item summary {
+  padding: 18px 22px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ICON */
+.faq-icon {
+  font-size: 20px;
+  color: #2563eb; /* devinci blue */
+  transition: transform 0.25s ease;
+}
+
+/* ANSWER */
+.faq-item p {
+  padding: 0 22px 18px;
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.7;
+  color: #475569; /* readable neutral */
+}
+
+/* OPEN STATE */
+.faq-item[open] {
+  border-color: #2563eb;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* HOVER */
+.faq-item:hover {
+  border-color: #93c5fd;
+}
+/* Button */
+.generate-btn {
+  background: linear-gradient(90deg, #d4ff4d, #4df7b8); /* green gradient */
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icon inside button */
+.icon {
+  font-size: 20px;
+}
+
+/* Narrow images for HOW + PHOTO sections */
+.mock-narrow {
+  max-width: 360px;      /* control width */
+  width: 100%;
+  margin: 0 auto;        /* center horizontally */
+}
+
+.mock-narrow img {
+  width: 100%;
+  height: auto;          /* keep aspect ratio */
+  object-fit: contain;
+}
+.step-box {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  background: #f4f4f4;
+}
+
+.step-box.active {
+  border: 2px solid #3f5efb;
+}
+
+.step-box span {
+  font-weight: bold;
+}
+
+/* PHOTO AI */
+.photo-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.photo-stack {
+  position: relative;
+  height: 300px;
+}
+
+.photo {
+  position: absolute;
+  width: 180px;
+  height: 240px;
+  border-radius: 18px;
+  background: #ddd;
+}
+
+.before { left: 0; }
+.sketch { left: 120px; top: -20px; }
+.after { left: 240px; }
+
+/* WHY */
+.why {
+  text-align: center;
+}
+
+.why-grid {
+  max-width: 1000px;
+  margin: 50px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.why-card {
+  padding: 30px;
+  border-radius: 20px;
+  background: #f6f6f6;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  background: linear-gradient(135deg, #7f7fd5, #86a8e7);
+  border-radius: 14px;
+}
+
+/* FAQ */
+.faq {
+  max-width: 900px;
+  margin: auto;
+}
+
+.faq details {
+  margin: 16px 0;
+}
+
+.center {
+  display: block;
+  width: fit-content;
+  margin: 40px auto 0;
+}
+
+.btn-primary {
+  padding: 14px 28px;
+  background: #3f5efb;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
